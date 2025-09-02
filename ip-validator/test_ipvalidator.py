@@ -13,3 +13,7 @@ def test_invalid_ip_address_ending_with_0(ip_validator):
 
 def test_invalid_ip_address_ending_with_255(ip_validator):
     assert ip_validator.validate_ipv4_address("0.0.0.255") == False
+
+def test_invalid_no_of_parts(ip_validator):
+    assert ip_validator.validate_ipv4_address("10.0.0") == False
+    assert ip_validator.validate_ipv4_address("10.0.0.0.1") == False
