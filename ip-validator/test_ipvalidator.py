@@ -33,3 +33,8 @@ def test_should_not_consider_extremes_as_valid(ip_validator):
 def test_formatting_issues(ip_validator):
     assert ip_validator.validate_ipv4_address(" 0.0.1.1 ") == False
     assert ip_validator.validate_ipv4_address("1.1.1\n.1") == False
+
+def test_ip_parts_should_range_between_0_to_255(ip_validator):
+    assert ip_validator.validate_ipv4_address("1.1.1111.1") == False
+    assert ip_validator.validate_ipv4_address("-1.1.1.1") == False
+    assert ip_validator.validate_ipv4_address("999.1.1.1") == False
