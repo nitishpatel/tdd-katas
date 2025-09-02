@@ -17,6 +17,4 @@ class IPValidator:
             return False
 
         last_octet = int(ip_parts[3])
-        if last_octet in (0,255):
-            return False
-        return True
+        return not(last_octet == 0 or last_octet == 255)
