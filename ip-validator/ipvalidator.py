@@ -10,4 +10,8 @@ class IPValidator:
             return False
         if ip_parts[3] == "0" or ip_parts[3] == "255":
             return False
+        invalid_parts = []
+        for i in ip_parts:
+            if not i.isnumeric():
+                return False
         return True
