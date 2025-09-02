@@ -14,9 +14,9 @@ class IPValidator:
         ip_parts = ip_address.split(".")
         if len(ip_parts) != 4:
             return False
-        for part in ip_parts:
-            if not is_valid_octet(part):
-                return False
+
+        if not all(is_valid_octet(part) for part in ip_parts):
+            return False
 
         last_octet = int(ip_parts[3])
         if last_octet in (0,255):
