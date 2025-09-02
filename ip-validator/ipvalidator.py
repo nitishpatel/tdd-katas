@@ -1,5 +1,8 @@
 
-
+def check_leading_zeros(value):
+    if len(value) > 1 and value[0] == "0":
+        return True
+    return False
 class IPValidator:
     def __init__(self):
         pass
@@ -13,5 +16,7 @@ class IPValidator:
         invalid_parts = []
         for i in ip_parts:
             if not i.isnumeric():
+                return False
+            if check_leading_zeros(i):
                 return False
         return True
