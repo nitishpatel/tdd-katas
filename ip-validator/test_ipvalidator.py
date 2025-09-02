@@ -25,3 +25,7 @@ def test_invalid_non_numeric_parts(ip_validator):
 
 def test_leading_zeros(ip_validator):
     assert ip_validator.validate_ipv4_address("10.0.01.1") == False
+
+def test_should_not_consider_extremes_as_valid(ip_validator):
+    assert ip_validator.validate_ipv4_address("0.0.0.0") == False
+    assert ip_validator.validate_ipv4_address("255.255.255.255") == False
