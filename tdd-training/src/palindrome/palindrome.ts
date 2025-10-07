@@ -1,12 +1,15 @@
-const reverse = (input: string): string => {
-  return input.split('').reverse().join('');
-};
+const reverse = (input: string): string =>
+  [...input.normalize('NFC')].reverse().join('');
 
-const cleanup = (input:string): string => {
-  return input.toLowerCase().replace(/[^a-z0-9]/g, '');
-}
-export const isPalindrome = (input:string) => {
+const cleanup = (input: string): string =>
+  input
+    .normalize('NFC')           // use NFC consistently
+    .toLowerCase()              // ok for most cases; use toLocaleLowerCase(locale) if needed
+    .replace(/[\p{P}\p{S}\s]/gu, '');
+
+export const isPalindrome = (input: string): boolean => {
   const cleanedInput = cleanup(input);
   const reversedInput = reverse(cleanedInput);
+  console.log(`comparing ${cleanedInput} and ${reversedInput}`);
   return cleanedInput === reversedInput;
 };

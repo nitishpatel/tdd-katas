@@ -29,11 +29,19 @@ describe("isPalindrome", () => {
   it("returns true for valid palindrome with punctuations 'Aba!", () => {
     expect(isPalindrome("Aba!")).toBe(true);
   });
-  it("returns true for valid palindrome with punctuations 'Aba!", () => {
-    expect(isPalindrome("Aba!")).toBe(true);
-  });
   it("returns true for valid palindrome with spaces 'Race Car", () => {
     expect(isPalindrome("Race Car")).toBe(true);
+  });
+  it("returns true for a valid palindrome phrase", () => {
+    expect(isPalindrome("A Santa lived as a      devil at NASA.")).toBe(true);
+  });
+  it("returns true for a valid palindrome with unicodes", () => {
+    expect(isPalindrome("✌️a✌️")).toBe(true);
+  });
+
+  // in different languages
+  it("returns true for a valid palindrome in hindi", () => {
+    expect(isPalindrome("कड़क")).toBe(true);
   });
 
 })
