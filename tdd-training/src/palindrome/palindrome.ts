@@ -1,15 +1,19 @@
-const reverse = (input: string): string =>
-  [...input.normalize('NFC')].reverse().join('');
+const graphemesOf = (text: string): string[] => {
+  const segmenter = new (Intl as any).Segmenter("en", { granularity: "grapheme" });
+  return Array.from(segmenter.segment(text.normalize("NFC")), (s: any) => s.segment);
+};
 
-const cleanup = (input: string): string =>
-  input
-    .normalize('NFC')           // use NFC consistently
-    .toLowerCase()              // ok for most cases; use toLocaleLowerCase(locale) if needed
-    .replace(/[\p{P}\p{S}\s]/gu, '');
+const reverseGraphemes = (text: string): string =>
+  graphemesOf(text).reverse().join("");
+
+const cleanup = (text: string): string =>
+  text
+    .normalize("NFC")
+    .toLowerCase()
+    .replace(/[\p{P}\s]/gu, "");
 
 export const isPalindrome = (input: string): boolean => {
-  const cleanedInput = cleanup(input);
-  const reversedInput = reverse(cleanedInput);
-  console.log(`comparing ${cleanedInput} and ${reversedInput}`);
-  return cleanedInput === reversedInput;
+  const normalized = cleanup(input);
+  const reversed = reverseGraphemes(normalized);
+  return normalized === reversed;
 };
