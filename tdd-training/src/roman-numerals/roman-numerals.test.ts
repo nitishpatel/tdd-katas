@@ -1,5 +1,5 @@
 import { describe,it,expect } from "vitest";
-import { romannumeral } from "./roman-numerals";
+import { romannumeral,toNumber } from "./roman-numerals";
 
 describe("Roman-Numerals",()=>{
   // zero
@@ -46,4 +46,9 @@ describe("Roman-Numerals",()=>{
     expect(romannumeral("900")).toBe("CM");
   })
 
+});
+describe('toNumber', () => {
+  it("return 1 for 'I'",()=>{
+    expect(toNumber("I")).toBe("1");
+  })
 });

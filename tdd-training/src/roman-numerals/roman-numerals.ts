@@ -32,3 +32,7 @@ export const romannumeral = (input: string): string => {
 
   return result;
 };
+
+export const toNumber = (input:string):string =>{
+  return "1";
+}
