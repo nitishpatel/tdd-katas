@@ -1,38 +1,61 @@
-const romanmap: Record<number, string> = {
-  1000: "M",
-  900:"CM",
-  500: "D",
-  400:"CD",
-  100: "C",
-  90:"XC",
-  50: "L",
-  40:"XL",
-  10: "X",
-  9:"IX",
-  5: "V",
-  4:"IV",
-  1: "I",
-};
+const ROMAN: Array<[string, number]> = [
+  ["M", 1000],
+  ["CM", 900],
+  ["D", 500],
+  ["CD", 400],
+  ["C", 100],
+  ["XC", 90],
+  ["L", 50],
+  ["XL", 40],
+  ["X", 10],
+  ["IX", 9],
+  ["V", 5],
+  ["IV", 4],
+  ["I", 1],
+];
 
-export const romannumeral = (input: string): string => {
-  const number = parseInt(input);
-  if (isNaN(number) || number <= 0) {
-    throw new Error("Invalid input");
-  }
+const ROMAN_TO_VALUE = new Map(ROMAN);
 
+export function toRoman(input: string | number): string {
+  const n = typeof input === "number" ? input : parseInt(input, 10);
+
+  let remaining = n;
   let result = "";
-  let remaining = number;
 
-  for (const value of Object.keys(romanmap).map(Number).sort((a, b) => b - a)) {
-    while (remaining >= value) {
-      result += romanmap[value];
-      remaining -= value;
+  for (const [sym, val] of ROMAN) {
+    while (remaining >= val) {
+      result += sym;
+      remaining -= val;
     }
   }
 
   return result;
-};
+}
 
-export const toNumber = (input:string):string =>{
-  return "1";
+export function fromRoman(roman: string): number {
+  const s = roman.toUpperCase();
+  if (/[^IVXLCDM]/.test(s)) {
+    throw new Error("Invalid Roman numeral: contains illegal characters");
+  }
+
+  let i = 0;
+  let total = 0;
+
+  while (i < s.length) {
+    const two = s.substring(i, i + 2);
+    if (two.length === 2 && ROMAN_TO_VALUE.has(two)) {
+      total += ROMAN_TO_VALUE.get(two)!;
+      i += 2;
+      continue;
+    }
+
+    const one = s[i];
+    if (!ROMAN_TO_VALUE.has(one)) {
+      throw new Error(`Invalid Roman numeral at position ${i}: ${one}`);
+    }
+    total += ROMAN_TO_VALUE.get(one)!;
+    i += 1;
+  }
+
+  return total;
 }
