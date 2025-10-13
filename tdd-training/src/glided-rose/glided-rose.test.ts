@@ -27,4 +27,24 @@ describe('Gilded Rose', () => {
       expect(items[0].quality).toBe(0);
     });
   });
+  describe('Aged Brie', () => {
+    it('should increase by 1 per day', () => {
+      const gildedRose = new GildedRose([new Item('Aged Brie', 1,1)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(0);
+      expect(items[0].quality).toBe(2);
+    });
+    it('should increase by 2 per day after sellin', () => {
+      const gildedRose = new GildedRose([new Item('Aged Brie', 0, 2)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-1);
+      expect(items[0].quality).toBe(4);
+    });
+    it('quality never exceeds 50', () => {
+      const gildedRose = new GildedRose([new Item('Aged Brie',1, 50)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(0);
+      expect(items[0].quality).toBe(50);
+    });
+  });
 });
