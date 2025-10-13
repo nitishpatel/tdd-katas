@@ -24,6 +24,7 @@ Day 0: { name: "Normal Item", sellIn: 5, quality: 10 }
 Day 1: { name: "Normal Item", sellIn: 4, quality: 9 }
 Day 6: { name: "Normal Item", sellIn: -1, quality: 3 }  (now -2 per day)
 Day 7: { name: "Normal Item", sellIn: -2, quality: 1 }
+
 2. Aged Brie
  
 Quality INCREASES by 1 each day (gets better with age!)
