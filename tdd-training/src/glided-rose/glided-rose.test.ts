@@ -47,4 +47,20 @@ describe('Gilded Rose', () => {
       expect(items[0].quality).toBe(50);
     });
   });
+  describe('Sulfuras, Hand of Ragnaros', () => {
+    it('should never change', () => {
+      const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 1,80)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(1);
+      expect(items[0].quality).toBe(80);
+    });
+
+    // TODO: Bug , ideally should not allow to create an item with quantity other than 80
+    // it('quality is always 80', () => {
+    //   const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 0, 1)]);
+    //   const items = gildedRose.updateQuality();
+    //   expect(items[0].sellIn).toBe(0);
+    //   expect(items[0].quality).toBe(1);
+    // });
+  });
 });
