@@ -60,7 +60,36 @@ describe('Gilded Rose', () => {
     //   const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 0, 1)]);
     //   const items = gildedRose.updateQuality();
     //   expect(items[0].sellIn).toBe(0);
-    //   expect(items[0].quality).toBe(1);
+    //   expect(items[0].quality).toBe(80);
     // });
+  });
+  describe('Backstage Passes to a TAFKAL80ETC concert', () => {
+    const itemName = "Backstage passes to a TAFKAL80ETC concert";
+    it('should increase by 1 per day if sellin is 10+', () => {
+      const gildedRose = new GildedRose([new Item(itemName, 15,20)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(14);
+      expect(items[0].quality).toBe(21);
+    });
+    it('should increase by 2 per day if sellin is less than 10', () => {
+      const gildedRose = new GildedRose([new Item(itemName, 9,20)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(8);
+      expect(items[0].quality).toBe(22);
+    });
+    it('should increase by 3 per day if sellin is less than 5', () => {
+      const gildedRose = new GildedRose([new Item(itemName, 5,20)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(4);
+      expect(items[0].quality).toBe(23);
+    });
+    it('quality should drop to 0 post sellin < 0', () => {
+      const gildedRose = new GildedRose([new Item(itemName, 0,100)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(-1);
+      expect(items[0].quality).toBe(0);
+    });
+
+
   });
 });
